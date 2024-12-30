@@ -7,74 +7,11 @@
     "_name": "_04da44d5"
   },
   {
-    "name": "admin-accounts",
-    "path": "/admin/accounts",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\accounts.vue",
-    "chunkName": "pages/admin/accounts",
-    "_name": "_ccf58ccc"
-  },
-  {
-    "name": "admin-category",
-    "path": "/admin/category",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\category.vue",
-    "chunkName": "pages/admin/category",
-    "_name": "_70d3eeb2"
-  },
-  {
-    "name": "admin-dashboard",
-    "path": "/admin/dashboard",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\dashboard.vue",
-    "chunkName": "pages/admin/dashboard",
-    "_name": "_6e6ac890"
-  },
-  {
-    "name": "admin-inventory",
-    "path": "/admin/inventory",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\inventory.vue",
-    "chunkName": "pages/admin/inventory",
-    "_name": "_3d2b5358"
-  },
-  {
-    "name": "admin-orders",
-    "path": "/admin/orders",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\orders.vue",
-    "chunkName": "pages/admin/orders",
-    "_name": "_57fa2019"
-  },
-  {
-    "name": "admin-payments",
-    "path": "/admin/payments",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\payments.vue",
-    "chunkName": "pages/admin/payments",
-    "_name": "_3ad89161"
-  },
-  {
-    "name": "admin-price",
-    "path": "/admin/price",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\price.vue",
-    "chunkName": "pages/admin/price",
-    "_name": "_34a50276"
-  },
-  {
-    "name": "admin-products",
-    "path": "/admin/products",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\products.vue",
-    "chunkName": "pages/admin/products",
-    "_name": "_d61f3fd0"
-  },
-  {
-    "name": "admin-qrscanner",
-    "path": "/admin/qrscanner",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\qrscanner.vue",
-    "chunkName": "pages/admin/qrscanner",
-    "_name": "_32dedb8e"
-  },
-  {
-    "name": "dispatch-dmodule",
-    "path": "/dispatch/dmodule",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\dispatch\\\\dmodule.vue",
-    "chunkName": "pages/dispatch/dmodule",
-    "_name": "_01565a0a"
+    "name": "dispatch-order_dispatch",
+    "path": "/dispatch/order_dispatch",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\dispatch\\\\order_dispatch.vue",
+    "chunkName": "pages/dispatch/order_dispatch",
+    "_name": "_35e53920"
   },
   {
     "name": "driver-ddmodule",

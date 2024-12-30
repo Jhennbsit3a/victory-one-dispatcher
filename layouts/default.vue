@@ -61,30 +61,10 @@ export default {
       showDrawer: true,
       userRole: null, // Add a property to store the user role
       items: [
-        { icon: 'mdi-view-dashboard', title: 'Dashboard', to: '/admin/dashboard', roles: ['admin'] },
-        { icon: 'mdi-account', title: 'Account Management', to: '/admin/accounts', roles: ['admin', 'cashier'] },
-        { icon: 'mdi-cube', title: 'Product Management', to: '/admin/products', roles: ['admin', 'cashier'] },
-        { icon: 'mdi-order-bool-ascending', title: 'Order Management', to: '/admin/orders', roles: ['admin', 'cashier'] },
-        { icon: 'mdi-currency-php', title: 'Price Management', to: '/admin/price', roles: ['admin', 'cashier'] },
-        { icon: 'mdi-folder', title: 'Category Management', to: '/admin/category', roles: ['admin'] },
-        { icon: 'mdi-warehouse', title: 'Inventory Management', to: '/admin/inventory', roles: ['admin', 'cashier'] },
-        { icon: 'mdi-credit-card', title: 'Payment Methods', to: '/admin/payments', roles: ['admin'] },
-        { icon: 'mdi-qrcode', title: 'QR Code', to: '/admin/qrscanner', roles: ['admin', 'cashier'] },
-        { icon: 'mdi-card-account-details-outline', title: 'Driver Module', to: '/driver/ddmodule', roles: ['admin','driver'] },
-        { icon: 'mdi-truck-alert-outline', title: 'Dispatch Module', to: '/dispatch/dmodule', roles: ['admin', 'dispatch'] },
+        { icon: 'mdi-truck-alert-outline', title: 'Dispatch Module', to: '/dispatch/order_dispatch', roles: ['admin', 'dispatch'] },
       ],
       showDrawerOnRoutes: [
-        '/driver/ddmodule',
-        '/dispatch/dmodule',
-        '/admin/dashboard',
-        '/admin/accounts',
-        '/admin/products',
-        '/admin/price',
-        '/admin/category',
-        '/admin/inventory',
-        '/admin/orders',
-        '/admin/payments',
-        '/admin/qrscanner'
+        '/dispatch/order_dispatch',
       ]
     };
   },
