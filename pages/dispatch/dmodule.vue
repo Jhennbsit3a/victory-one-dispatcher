@@ -14,10 +14,13 @@
     <v-row>
       <v-col v-for="order in filteredOrders" :key="order.id" cols="12" md="6" lg="4">
         <v-card class="mb-4">
-          <!-- Updated to show Customer Name -->
-          <v-card-title>
-            <h3>Customer Name: {{ getCustomerName(order.userId) || 'Unknown User' }}</h3>
-          </v-card-title>
+          <v-card-text>
+            <h3 class="mb-2">Customer Name: <span class="font-weight-medium">{{ getCustomerName(order.userId) ||
+                'Unknown User' }}</span></h3>
+            <p class="mb-2">
+              <strong>Delivery Address:</strong> <span>{{ order.deliveryAddress || 'No address provided' }}</span>
+            </p>
+          </v-card-text>
           <v-card-actions>
             <v-btn :color="order.status === 'Shipped' ? 'grey' : 'success'" :disabled="order.status === 'Shipped'"
               @click="openConfirmDialog(order.id)">
@@ -30,6 +33,7 @@
         </v-card>
       </v-col>
     </v-row>
+
 
 
     <!-- Confirmation Dialog -->
@@ -227,6 +231,23 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+p {
+  font-size: 14px;
+  color: #7d7d7d;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
 .text-center {
   text-align: center;
 }
