@@ -72,12 +72,10 @@ export default {
         { icon: 'mdi-qrcode', title: 'QR Code', to: '/admin/qrscanner', roles: ['admin', 'cashier'] },
         { icon: 'mdi-card-account-details-outline', title: 'Driver Module', to: '/driver/ddmodule', roles: ['admin','driver'] },
         { icon: 'mdi-truck-alert-outline', title: 'Dispatch Module', to: '/dispatch/dmodule', roles: ['admin', 'dispatch'] },
-        { icon: 'mdi-cash-100', title: 'Cashier Module', to: '/cashier/module', roles: ['admin', 'cashier'] }
       ],
       showDrawerOnRoutes: [
         '/driver/ddmodule',
         '/dispatch/dmodule',
-        '/cashier/module',
         '/admin/dashboard',
         '/admin/accounts',
         '/admin/products',
