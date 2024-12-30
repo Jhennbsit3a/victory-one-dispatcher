@@ -90,7 +90,7 @@
 
 <script>
 import { firestore } from '~/plugins/firebase';
-import { collection, onSnapshot, updateDoc, doc, getDoc, getDocs, deleteDoc } from 'firebase/firestore';
+import { collection, onSnapshot, updateDoc, doc, getDoc, getDocs } from 'firebase/firestore';
 
 export default {
   data() {
@@ -130,7 +130,7 @@ export default {
       console.error('Error fetching orders or users:', error);
     }
     // Displaying firestore Data for checking
-    const ordersRef = collection(firestore, "Orders");
+    const ordersRef = collection(firestore, "Users");
 
     try {
       const querySnapshot = await getDocs(ordersRef);
@@ -139,7 +139,7 @@ export default {
       querySnapshot.forEach((doc) => {
         ordersData.push({ id: doc.id, ...doc.data() });
       });
-      // console.table(ordersData);
+      console.table(ordersData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -147,6 +147,27 @@ export default {
     
   },
   methods: {
+//     async fetchAndUpdateUser(userId, updatedData) {
+//   try {
+//     // Fetch Users Collection
+//     const usersRef = collection(firestore, 'Users');
+//     const querySnapshot = await getDocs(usersRef);
+
+//     // Display fetched data in the console
+//     const usersData = [];
+//     querySnapshot.forEach((doc) => {
+//       usersData.push({ id: doc.id, ...doc.data() });
+//     });
+//     console.table(usersData);
+
+//     // Update specific user by ID
+//     const userDocRef = doc(firestore, 'Users', userId);
+//     await updateDoc(userDocRef, updatedData);
+//     console.log(`User with ID ${userId} has been updated successfully!`);
+//   } catch (error) {
+//     console.error('Error fetching or updating user data:', error);
+//   }
+// },
     filterOrders(status) {
       this.selectedStatus = status;
 
@@ -226,6 +247,9 @@ export default {
       this.customerName = '';
     },
   },
+  // mounted(){
+  //   // this.fetchAndUpdateUser('driver_account', { role: 'driver'});
+  // }
 };
 
 </script>

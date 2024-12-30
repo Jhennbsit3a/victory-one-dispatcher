@@ -3,7 +3,7 @@
     <!-- App Bar -->
     <v-app-bar v-if="showDrawer" app style="background-color: #333; color: white;">
       <v-app-bar-nav-icon @click="drawer = !drawer" style="color: white;"></v-app-bar-nav-icon>
-      <v-toolbar-title>Panel</v-toolbar-title>
+      <v-toolbar-title>Dispatcher</v-toolbar-title>
     </v-app-bar>
 
     <!-- Navigation Drawer -->
