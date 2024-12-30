@@ -4,46 +4,33 @@
 
     <!-- Filter Buttons -->
     <v-row class="mb-4" justify="center">
-      <v-btn
-        v-for="status in ['All', 'Pending', 'Shipped']"
-        :key="status"
-        class="mx-2"
-        color="primary"
-        :outlined="selectedStatus !== status"
-        @click="filterOrders(status)"
-      >
+      <v-btn v-for="status in ['All', 'Pending', 'Shipped']" :key="status" class="mx-2" color="primary"
+        :outlined="selectedStatus !== status" @click="filterOrders(status)">
         {{ status }}
       </v-btn>
     </v-row>
 
     <!-- Orders Grid -->
     <v-row>
-      <v-col
-        v-for="order in filteredOrders"
-        :key="order.id"
-        cols="12"
-        md="6"
-        lg="4"
-      >
+      <v-col v-for="order in filteredOrders" :key="order.id" cols="12" md="6" lg="4">
         <v-card class="mb-4">
+          <!-- Updated to show Customer Name -->
           <v-card-title>
-            <h3>Order ID: {{ order.id }}</h3>
+            <h3>Customer Name: {{ getCustomerName(order.userId) || 'Unknown User' }}</h3>
           </v-card-title>
           <v-card-actions>
-            <v-btn
-  :color="order.status === 'Shipped' ? 'grey' : 'success'"
-  :disabled="order.status === 'Shipped'"
-  @click="openConfirmDialog(order.id)"
->
-  {{ order.status === 'Shipped' ? 'Shipped' : 'Dispatch' }}
-</v-btn>
-  <v-btn color="info" @click="viewOrderDetails(order)">
-    View Details
-  </v-btn>
-</v-card-actions>
+            <v-btn :color="order.status === 'Shipped' ? 'grey' : 'success'" :disabled="order.status === 'Shipped'"
+              @click="openConfirmDialog(order.id)">
+              {{ order.status === 'Shipped' ? 'Shipped' : 'Dispatch' }}
+            </v-btn>
+            <v-btn color="info" @click="viewOrderDetails(order)">
+              View Details
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
+
 
     <!-- Confirmation Dialog -->
     <v-dialog v-model="confirmDialog" max-width="400px">
@@ -99,7 +86,7 @@
 
 <script>
 import { firestore } from '~/plugins/firebase';
-import { collection, onSnapshot, updateDoc, doc, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot, updateDoc, doc, getDoc, getDocs, deleteDoc } from 'firebase/firestore';
 
 export default {
   data() {
@@ -112,33 +99,67 @@ export default {
       selectedOrder: {}, // Currently selected order for details
       customerName: '', // Customer's full name
       orderToDispatch: null, // ID of the order to dispatch
+      usersMap: {}, // Cache user data
     };
   },
   async created() {
     // Fetch Orders Collection in Real-Time
     try {
+      // Fetch Orders Collection in Real-Time
       const ordersRef = collection(firestore, 'Orders');
       onSnapshot(ordersRef, (snapshot) => {
         this.orders = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        this.filterOrders(this.selectedStatus); // Apply filter after fetching data
+        this.filterOrders(this.selectedStatus);
       });
+
+      // Fetch Users Collection and Build Cache
+      const usersSnapshot = await getDocs(collection(firestore, 'Users'));
+      this.usersMap = usersSnapshot.docs.reduce((map, doc) => {
+        const userData = doc.data();
+        map[doc.id] = `${userData.firstName} ${userData.lastName}`;
+        return map;
+      }, {});
     } catch (error) {
-      console.error('Error fetching orders:', error);
+      console.error('Error fetching orders or users:', error);
     }
+    // Displaying firestore Data for checking
+    const ordersRef = collection(firestore, "Orders");
+
+    try {
+      const querySnapshot = await getDocs(ordersRef);
+
+      const ordersData = [];
+      querySnapshot.forEach((doc) => {
+        ordersData.push({ id: doc.id, ...doc.data() });
+      });
+      // console.table(ordersData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    // Displaying firestore Data for checking
+    
   },
   methods: {
     filterOrders(status) {
       this.selectedStatus = status;
+
+      // Exclude "walk-in-order" from filtered results
       if (status === 'All') {
-        this.filteredOrders = this.orders;
+        this.filteredOrders = this.orders.filter(
+          (order) => order.status !== 'walk-in-order'
+        );
       } else {
         this.filteredOrders = this.orders.filter(
-          (order) => order.status === status
+          (order) => order.status === status && order.status !== 'walk-in-order'
         );
       }
+    },
+    getCustomerName(userId) {
+      // Lookup customer name from preloaded usersMap
+      return this.usersMap[userId];
     },
     openConfirmDialog(orderId) {
       this.orderToDispatch = orderId; // Save the order ID to be dispatched
