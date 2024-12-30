@@ -61,10 +61,12 @@ export default {
       showDrawer: true,
       userRole: null, // Add a property to store the user role
       items: [
-        { icon: 'mdi-truck-alert-outline', title: 'Dispatch Module', to: '/dispatch/order_dispatch', roles: ['admin', 'dispatch'] },
+        { icon: 'mdi-truck-alert-outline', title: 'Orders', to: '/dispatch/order_dispatch', roles: ['admin', 'dispatch'] },
+        { icon: 'mdi-truck-alert-outline', title: 'Shipped Orders', to: '/dispatch/shipped_orders', roles: ['admin', 'dispatch'] },
       ],
       showDrawerOnRoutes: [
         '/dispatch/order_dispatch',
+        '/dispatch/shipped_orders',
       ]
     };
   },

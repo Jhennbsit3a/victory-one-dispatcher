@@ -14,11 +14,11 @@
     "_name": "_35e53920"
   },
   {
-    "name": "driver-ddmodule",
-    "path": "/driver/ddmodule",
-    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\driver\\\\ddmodule.vue",
-    "chunkName": "pages/driver/ddmodule",
-    "_name": "_0d54893f"
+    "name": "dispatch-shipped_orders",
+    "path": "/dispatch/shipped_orders",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\dispatch\\\\shipped_orders.vue",
+    "chunkName": "pages/dispatch/shipped_orders",
+    "_name": "_b1c4cd14"
   },
   {
     "name": "index",

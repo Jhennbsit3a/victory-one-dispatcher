@@ -6,7 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _04da44d5 = () => interopDefault(import('..\\pages\\no-access.vue' /* webpackChunkName: "pages/no-access" */))
 const _35e53920 = () => interopDefault(import('..\\pages\\dispatch\\order_dispatch.vue' /* webpackChunkName: "pages/dispatch/order_dispatch" */))
-const _0d54893f = () => interopDefault(import('..\\pages\\driver\\ddmodule.vue' /* webpackChunkName: "pages/driver/ddmodule" */))
+const _b1c4cd14 = () => interopDefault(import('..\\pages\\dispatch\\shipped_orders.vue' /* webpackChunkName: "pages/dispatch/shipped_orders" */))
 const _595b1437 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -29,9 +29,9 @@ export const routerOptions = {
     component: _35e53920,
     name: "dispatch-order_dispatch"
   }, {
-    path: "/driver/ddmodule",
-    component: _0d54893f,
-    name: "driver-ddmodule"
+    path: "/dispatch/shipped_orders",
+    component: _b1c4cd14,
+    name: "dispatch-shipped_orders"
   }, {
     path: "/",
     component: _595b1437,

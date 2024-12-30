@@ -4,21 +4,33 @@
 
     <!-- Filter Buttons -->
     <v-row class="mb-4" justify="center">
-      <v-btn v-for="status in ['All', 'Pending', 'Shipped']" :key="status" class="mx-2" color="primary"
+      <v-btn v-for="status in ['All', 'Pending']" :key="status" class="mx-2" color="primary"
         :outlined="selectedStatus !== status" @click="filterOrders(status)">
         {{ status }}
       </v-btn>
     </v-row>
 
+    <!-- Skeleton Loader -->
+    <v-row v-if="loading">
+      <v-col cols="12" md="6" lg="4" v-for="n in 6" :key="n">
+        <v-skeleton-loader type="card" class="mb-4"></v-skeleton-loader>
+      </v-col>
+    </v-row>
+
     <!-- Orders Grid -->
-    <v-row>
+    <v-row v-else>
       <v-col v-for="order in filteredOrders" :key="order.id" cols="12" md="6" lg="4">
         <v-card class="mb-4">
           <v-card-text>
-            <h3 class="mb-2">Customer Name: <span class="font-weight-medium">{{ getCustomerName(order.userId) ||
-                'Unknown User' }}</span></h3>
+            <h3 class="mb-2">
+              Customer Name:
+              <span class="font-weight-medium">{{
+                getCustomerName(order.userId) || 'Unknown User'
+              }}</span>
+            </h3>
             <p class="mb-2">
-              <strong>Delivery Address:</strong> <span>{{ order.deliveryAddress || 'No address provided' }}</span>
+              <strong>Delivery Address:</strong>
+              <span>{{ order.deliveryAddress || 'No address provided' }}</span>
             </p>
           </v-card-text>
           <v-card-actions>
@@ -26,15 +38,11 @@
               @click="openConfirmDialog(order.id)">
               {{ order.status === 'Shipped' ? 'Shipped' : 'Dispatch' }}
             </v-btn>
-            <v-btn color="info" @click="viewOrderDetails(order)">
-              View Details
-            </v-btn>
+            <v-btn color="info" @click="viewOrderDetails(order)">View Details</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
-
-
 
     <!-- Confirmation Dialog -->
     <v-dialog v-model="confirmDialog" max-width="400px">
@@ -95,21 +103,20 @@ import { collection, onSnapshot, updateDoc, doc, getDoc, getDocs } from 'firebas
 export default {
   data() {
     return {
-      orders: [], // All orders from Firestore
-      filteredOrders: [], // Filtered orders to display
-      selectedStatus: 'All', // Currently selected filter
-      confirmDialog: false, // Confirmation dialog visibility
-      detailsDialog: false, // Dialog visibility for order details
-      selectedOrder: {}, // Currently selected order for details
-      customerName: '', // Customer's full name
-      orderToDispatch: null, // ID of the order to dispatch
-      usersMap: {}, // Cache user data
+      orders: [],
+      filteredOrders: [],
+      selectedStatus: 'All',
+      confirmDialog: false,
+      detailsDialog: false,
+      selectedOrder: {},
+      customerName: '',
+      orderToDispatch: null,
+      usersMap: {},
+      loading: true, // New loading state
     };
   },
   async created() {
-    // Fetch Orders Collection in Real-Time
     try {
-      // Fetch Orders Collection in Real-Time
       const ordersRef = collection(firestore, 'Orders');
       onSnapshot(ordersRef, (snapshot) => {
         this.orders = snapshot.docs.map((doc) => ({
@@ -117,9 +124,9 @@ export default {
           ...doc.data(),
         }));
         this.filterOrders(this.selectedStatus);
+        this.loading = false; // Turn off loading after fetching data
       });
 
-      // Fetch Users Collection and Build Cache
       const usersSnapshot = await getDocs(collection(firestore, 'Users'));
       this.usersMap = usersSnapshot.docs.reduce((map, doc) => {
         const userData = doc.data();
@@ -128,117 +135,56 @@ export default {
       }, {});
     } catch (error) {
       console.error('Error fetching orders or users:', error);
+      this.loading = false; // Turn off loading on error
     }
-    // Displaying firestore Data for checking
-    const ordersRef = collection(firestore, "Users");
-
-    try {
-      const querySnapshot = await getDocs(ordersRef);
-
-      const ordersData = [];
-      querySnapshot.forEach((doc) => {
-        ordersData.push({ id: doc.id, ...doc.data() });
-      });
-      console.table(ordersData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-    // Displaying firestore Data for checking
-    
   },
   methods: {
-//     async fetchAndUpdateUser(userId, updatedData) {
-//   try {
-//     // Fetch Users Collection
-//     const usersRef = collection(firestore, 'Users');
-//     const querySnapshot = await getDocs(usersRef);
-
-//     // Display fetched data in the console
-//     const usersData = [];
-//     querySnapshot.forEach((doc) => {
-//       usersData.push({ id: doc.id, ...doc.data() });
-//     });
-//     console.table(usersData);
-
-//     // Update specific user by ID
-//     const userDocRef = doc(firestore, 'Users', userId);
-//     await updateDoc(userDocRef, updatedData);
-//     console.log(`User with ID ${userId} has been updated successfully!`);
-//   } catch (error) {
-//     console.error('Error fetching or updating user data:', error);
-//   }
-// },
     filterOrders(status) {
       this.selectedStatus = status;
-
-      // Exclude "walk-in-order" from filtered results
-      if (status === 'All') {
-        this.filteredOrders = this.orders.filter(
-          (order) => order.status !== 'walk-in-order'
-        );
-      } else {
-        this.filteredOrders = this.orders.filter(
-          (order) => order.status === status && order.status !== 'walk-in-order'
-        );
-      }
+      this.filteredOrders =
+        status === 'All'
+          ? this.orders.filter((order) => order.status !== 'walk-in-order')
+          : this.orders.filter(
+            (order) => order.status === status && order.status !== 'walk-in-order'
+          );
     },
     getCustomerName(userId) {
-      // Lookup customer name from preloaded usersMap
       return this.usersMap[userId];
     },
     openConfirmDialog(orderId) {
-      this.orderToDispatch = orderId; // Save the order ID to be dispatched
-      this.confirmDialog = true; // Show the confirmation dialog
+      this.orderToDispatch = orderId;
+      this.confirmDialog = true;
     },
     closeConfirmDialog() {
-      this.orderToDispatch = null; // Clear the order ID
-      this.confirmDialog = false; // Hide the confirmation dialog
+      this.orderToDispatch = null;
+      this.confirmDialog = false;
     },
-    async   confirmDispatch() {
-      if (!this.orderToDispatch) return; // Exit if no order is selected
+    async confirmDispatch() {
+      if (!this.orderToDispatch) return;
 
       try {
         const orderDocRef = doc(firestore, 'Orders', this.orderToDispatch);
-
-        // Update the order's status to 'Dispatched'
         await updateDoc(orderDocRef, { status: 'Shipped' });
-
-        // Refresh the filtered list to reflect changes
         this.filterOrders(this.selectedStatus);
-
-        // Show a success message (optional)
-        this.snackbar = true;
-        this.snackbarMessage = `Order ${this.orderToDispatch} dispatched successfully!`;
-
-        // Close the confirmation dialog
         this.closeConfirmDialog();
       } catch (error) {
         console.error('Error dispatching order:', error);
-        // Close the dialog even if there was an error
         this.closeConfirmDialog();
       }
     },
     async viewOrderDetails(order) {
       try {
-        // Set the selected order
         this.selectedOrder = order;
-
-        // Fetch the user's name from the Users collection
         const userDocRef = doc(firestore, 'Users', order.userId);
         const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          this.customerName = `${userData.firstName} ${userData.lastName}`;
-        } else {
-          this.customerName = 'Unknown User';
-        }
-
-        // Open the details dialog
+        this.customerName = userDoc.exists()
+          ? `${userDoc.data().firstName} ${userDoc.data().lastName}`
+          : 'Unknown User';
         this.detailsDialog = true;
       } catch (error) {
         console.error('Error fetching user details:', error);
         this.customerName = 'Unknown User';
-        this.detailsDialog = true; // Show dialog even if user details fail
+        this.detailsDialog = true;
       }
     },
     closeDetailsDialog() {
@@ -247,11 +193,7 @@ export default {
       this.customerName = '';
     },
   },
-  // mounted(){
-  //   // this.fetchAndUpdateUser('driver_account', { role: 'driver'});
-  // }
 };
-
 </script>
 
 <style scoped>

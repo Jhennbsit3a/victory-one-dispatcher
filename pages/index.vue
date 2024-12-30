@@ -4,7 +4,7 @@
       <v-col cols="12" sm="10" md="6" lg="4">
         <v-card class="sign-in-card">
           <v-card-text class="text-center mt-4">
-            <h2>Sign In</h2>
+            <h2>Dispatcher Sign In</h2>
           </v-card-text>
 
           <v-card-text>
@@ -45,7 +45,8 @@
               <v-btn 
                 @click="signIn" 
                 :disabled="loading" 
-                class="primary-btn full-width" 
+                class="primary-btn full-width"
+                color="orange" 
                 block
               >
                 <v-icon v-if="loading" left>mdi-loading</v-icon>
@@ -55,7 +56,7 @@
             </v-form>
           </v-card-text>
 
-          <div class="text-center mt-1">
+          <!-- <div class="text-center mt-1">
             <v-btn 
               text 
               @click="forgotPasswordDialog = true" 
@@ -63,7 +64,7 @@
             >
               Forgot Password?
             </v-btn>
-          </div>
+          </div> -->
         </v-card>
       </v-col>
     </v-row>
@@ -137,14 +138,14 @@ export default {
             // Assuming only one user matches the email and password
             const userDoc = usersSnapshot.docs[0];
             const userData = userDoc.data();
-            console.log(userData);
+            // console.log(userData);
 
             const userRole = userData.role;
-            if (["admin", "cashier", "owner", "dispatcher"].includes(userRole)) {
-              console.log(`Role "${userRole}" is validated. Access granted.`);
+            if (["admin", "owner", "dispatcher"].includes(userRole)) {
+              // console.log(`Role "${userRole}" is validated. Access granted.`);
               this.$router.push("/dispatch/order_dispatch");
             } else {
-              console.log(`Role "${userRole}" is not authorized. Redirecting to no-access page.`);
+              // console.log(`Role "${userRole}" is not authorized. Redirecting to no-access page.`);
               this.$router.push("/no-access");
             }
           } else {
