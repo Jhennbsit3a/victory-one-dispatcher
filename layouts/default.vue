@@ -1,20 +1,20 @@
 <template>
-  <v-app dark>
+  <v-app>
     <!-- App Bar -->
-    <v-app-bar v-if="showDrawer" app style="background-color: #333; color: white;">
-      <v-app-bar-nav-icon @click="drawer = !drawer" style="color: white;"></v-app-bar-nav-icon>
+    <v-app-bar v-if="showDrawer" app style="background-color: #333; color: black;" color="white">
+      <v-app-bar-nav-icon @click="drawer = !drawer" style="color: black;" color="black"></v-app-bar-nav-icon>
       <v-toolbar-title>Dispatcher</v-toolbar-title>
     </v-app-bar>
 
     <!-- Navigation Drawer -->
     <v-navigation-drawer v-if="showDrawer" v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app
-      style="background-color: #333;">
+      style="background-color: #333;" color="white">
       <v-layout column fill-height>
         <!-- Navigation Items -->
         <v-list>
-          <v-list-item v-for="(item, i) in filteredItems" :key="i" :to="item.to" router exact style="color: white;">
+          <v-list-item v-for="(item, i) in filteredItems" :key="i" :to="item.to" router exact style="color: black;">
             <v-list-item-action>
-              <v-icon style="color: white;">{{ item.icon }}</v-icon>
+              <v-icon style="color: black;">{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -61,8 +61,8 @@ export default {
       showDrawer: true,
       userRole: null, // Add a property to store the user role
       items: [
-        { icon: 'mdi-truck-alert-outline', title: 'Orders', to: '/dispatch/order_dispatch', roles: ['admin', 'dispatch'] },
-        { icon: 'mdi-truck-alert-outline', title: 'Shipped Orders', to: '/dispatch/shipped_orders', roles: ['admin', 'dispatch'] },
+        { icon: 'mdi-package-variant', title: 'Orders', to: '/dispatch/order_dispatch', roles: ['admin', 'dispatch'] },
+        { icon: 'mdi-truck-fast', title: 'Shipped Orders', to: '/dispatch/shipped_orders', roles: ['admin', 'dispatch'] },
       ],
       showDrawerOnRoutes: [
         '/dispatch/order_dispatch',
