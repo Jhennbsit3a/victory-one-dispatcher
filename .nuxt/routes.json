@@ -1,0 +1,80 @@
+[
+  {
+    "name": "no-access",
+    "path": "/no-access",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\no-access.vue",
+    "chunkName": "pages/no-access"
+  },
+  {
+    "name": "admin-accounts",
+    "path": "/admin/accounts",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\accounts.vue",
+    "chunkName": "pages/admin/accounts"
+  },
+  {
+    "name": "admin-category",
+    "path": "/admin/category",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\category.vue",
+    "chunkName": "pages/admin/category"
+  },
+  {
+    "name": "admin-dashboard",
+    "path": "/admin/dashboard",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\dashboard.vue",
+    "chunkName": "pages/admin/dashboard"
+  },
+  {
+    "name": "admin-inventory",
+    "path": "/admin/inventory",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\inventory.vue",
+    "chunkName": "pages/admin/inventory"
+  },
+  {
+    "name": "admin-orders",
+    "path": "/admin/orders",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\orders.vue",
+    "chunkName": "pages/admin/orders"
+  },
+  {
+    "name": "admin-payments",
+    "path": "/admin/payments",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\payments.vue",
+    "chunkName": "pages/admin/payments"
+  },
+  {
+    "name": "admin-price",
+    "path": "/admin/price",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\price.vue",
+    "chunkName": "pages/admin/price"
+  },
+  {
+    "name": "admin-products",
+    "path": "/admin/products",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\products.vue",
+    "chunkName": "pages/admin/products"
+  },
+  {
+    "name": "admin-qrscanner",
+    "path": "/admin/qrscanner",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\admin\\\\qrscanner.vue",
+    "chunkName": "pages/admin/qrscanner"
+  },
+  {
+    "name": "dispatch-dmodule",
+    "path": "/dispatch/dmodule",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\dispatch\\\\dmodule.vue",
+    "chunkName": "pages/dispatch/dmodule"
+  },
+  {
+    "name": "driver-ddmodule",
+    "path": "/driver/ddmodule",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\driver\\\\ddmodule.vue",
+    "chunkName": "pages/driver/ddmodule"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\Prof\\\\Desktop\\\\victory-one-dispatcher\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
